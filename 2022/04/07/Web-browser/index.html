@@ -20,28 +20,32 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wayne201299.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Each pattern describes a problem which occurs over and over again … and then describes the core of the solution to that problem, in such a way that you can use this solution a million times over, wit">
+    <meta name="description" content="瀏覽器運作方式是所有Web工程師的都需要了解的，可以幫助我們了解網頁背後做了什麼事  本篇會先以主流的瀏覽器來做討論  Chrome Firefox Internet Explorer Safari">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Design Pattern">
-<meta property="og:url" content="https://wayne201299.github.io/2022/03/16/DesignPattern/index.html">
+<meta property="og:title" content="How browsers work?">
+<meta property="og:url" content="https://wayne201299.github.io/2022/04/07/Web-browser/index.html">
 <meta property="og:site_name" content="Coding 筆記">
-<meta property="og:description" content="Each pattern describes a problem which occurs over and over again … and then describes the core of the solution to that problem, in such a way that you can use this solution a million times over, wit">
+<meta property="og:description" content="瀏覽器運作方式是所有Web工程師的都需要了解的，可以幫助我們了解網頁背後做了什麼事  本篇會先以主流的瀏覽器來做討論  Chrome Firefox Internet Explorer Safari">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2022-03-16T09:21:18.000Z">
-<meta property="article:modified_time" content="2022-03-23T06:27:57.724Z">
+<meta property="og:image" content="https://i.imgur.com/umsxUvo.png">
+<meta property="og:image" content="https://i.imgur.com/PtfDSWa.png">
+<meta property="article:published_time" content="2022-04-07T06:53:06.000Z">
+<meta property="article:modified_time" content="2022-04-07T06:56:21.125Z">
 <meta property="article:author" content="Alan Zhuang">
-<meta property="article:tag" content="Design Pattern">
+<meta property="article:tag" content="browser">
+<meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/umsxUvo.png">
 
 
-<link rel="canonical" href="https://wayne201299.github.io/2022/03/16/DesignPattern/">
+<link rel="canonical" href="https://wayne201299.github.io/2022/04/07/Web-browser/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://wayne201299.github.io/2022/03/16/DesignPattern/","path":"2022/03/16/DesignPattern/","title":"Design Pattern"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://wayne201299.github.io/2022/04/07/Web-browser/","path":"2022/04/07/Web-browser/","title":"How browsers work?"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Design Pattern | Coding 筆記</title>
+<title>How browsers work? | Coding 筆記</title>
   
 
 
@@ -121,7 +125,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E8%A6%81%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">為什麼要使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Creational"><span class="nav-number">2.</span> <span class="nav-text">Creational</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Structural"><span class="nav-number">3.</span> <span class="nav-text">Structural</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Behavioral"><span class="nav-number">4.</span> <span class="nav-text">Behavioral</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BC%B8%E5%85%A5%E7%B6%B2%E5%9D%80%E5%BE%8C%E7%99%BC%E7%94%9F%E4%BA%86%E4%BB%80%E9%BA%BC%E4%BA%8B"><span class="nav-number">1.</span> <span class="nav-text">輸入網址後發生了什麼事</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%80%8F%E8%A6%BD%E5%99%A8%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="nav-number">2.</span> <span class="nav-text">瀏覽器主要功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%80%8F%E8%A6%BD%E5%99%A8%E7%B5%84%E6%88%90"><span class="nav-number">3.</span> <span class="nav-text">瀏覽器組成</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -194,7 +198,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://wayne201299.github.io/2022/03/16/DesignPattern/">
+    <link itemprop="mainEntityOfPage" href="https://wayne201299.github.io/2022/04/07/Web-browser/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -207,12 +211,12 @@
     </span>
     
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Design Pattern | Coding 筆記">
+      <meta itemprop="name" content="How browsers work? | Coding 筆記">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Design Pattern
+          How browsers work?
         </h1>
 
         <div class="post-meta-container">
@@ -222,15 +226,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
+      
 
-      <time title="創建時間：2022-03-16 17:21:18" itemprop="dateCreated datePublished" datetime="2022-03-16T17:21:18+08:00">2022-03-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2022-03-23 14:27:57" itemprop="dateModified" datetime="2022-03-23T14:27:57+08:00">2022-03-23</time>
+      <time title="創建時間：2022-04-07 14:53:06 / 修改時間：14:56:21" itemprop="dateCreated datePublished" datetime="2022-04-07T14:53:06+08:00">2022-04-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -238,7 +236,7 @@
       </span>
       <span class="post-meta-item-text">分類於</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Design-Pattern/" itemprop="url" rel="index"><span itemprop="name">Design Pattern</span></a>
+          <a href="/categories/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/" itemprop="url" rel="index"><span itemprop="name">前端開發</span></a>
         </span>
     </span>
 
@@ -251,8 +249,8 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/2022/03/16/DesignPattern/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/03/16/DesignPattern/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2022/04/07/Web-browser/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/04/07/Web-browser/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -267,150 +265,44 @@
     
     <div class="post-body" itemprop="articleBody">
         <blockquote>
-<p>Each pattern describes a problem which occurs over and over again … and then describes the core of the solution to that problem, in such a way that you can use this solution a million times over, without doing it the same way twice. @Christopher Alexander</p>
+<p>瀏覽器運作方式是所有Web工程師的都需要了解的，可以幫助我們了解網頁背後做了什麼事</p>
 </blockquote>
-<p>目前有26種主要的設計模式，又可以分成三大類</p>
+<p>本篇會先以主流的瀏覽器來做討論</p>
 <ul>
-<li>Creational：設計類別或物件的實例化</li>
-<li>Structural：類別的架構，設計的目的是增加類別的功能性、可擴充性</li>
-<li>Behavioral：類別的行為，包含與其他物件互動的方式<span id="more"></span></li>
+<li><strong>Chrome</strong></li>
+<li>Firefox</li>
+<li>Internet Explorer</li>
+<li>Safari<span id="more"></span></li>
 </ul>
-<h2 id="為什麼要使用"><a href="#為什麼要使用" class="headerlink" title="為什麼要使用"></a>為什麼要使用</h2><ul>
-<li>保持軟體彈性</li>
-<li>降低耦合度</li>
-<li>提高重複可用性</li>
-<li>提升解決軟體問題的能力</li>
+<h2 id="輸入網址後發生了什麼事"><a href="#輸入網址後發生了什麼事" class="headerlink" title="輸入網址後發生了什麼事"></a>輸入網址後發生了什麼事</h2><ol>
+<li>第一次輸入網站URL時，首先會向<font color='F000'>DNS(Domain Name Server)</font>發送lookup請求，找到相對應的<font color='F000'>IP位址</font></li>
+<li>這時候IP會先被cache住，再次輸入網址時就不會重複再去lookup IP地址一次，但是地址中要是有不同的hostname就必需要多次呼叫(ex:image、font、script…)</li>
+<li>當IP位址確定了，會執行<font color='F000'>TCP三次握手協定</font>來確認雙方的連接狀況正常</li>
+<li>連接建立成功後，伺服器傳送資源，</li>
+<li>瀏覽器解析內容並渲染畫面</li>
+</ol>
+<h2 id="瀏覽器主要功能"><a href="#瀏覽器主要功能" class="headerlink" title="瀏覽器主要功能"></a>瀏覽器主要功能</h2><p>運作方式大致是瀏覽器會主動向伺服器請求[資源]，再將接收的資源渲染到瀏覽器窗口。</p>
+<p>這邊指的資源大部分是HTML檔案 || PDF || 圖片…等，資源的位置則是透過<font color='F000'><strong>URI</strong></font>來指定，HTML規格由W3C規範，但各瀏覽器在W3C規範下都有開發出自己的一套規則，所以帶來許多<font color='F000'>兼容性問題</font></p>
+<p>各瀏覽器介面共通點</p>
+<ul>
+<li>輸入URI的地址欄</li>
+<li>上一頁下一頁</li>
+<li>重新整理</li>
+<li>書籤</li>
+<li>回到首頁</li>
 </ul>
-<h2 id="Creational"><a href="#Creational" class="headerlink" title="Creational"></a>Creational</h2><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Abstract Factory</td>
-<td>宣告類別但不實做內容</td>
-</tr>
-<tr>
-<td>Builder</td>
-<td>Separates object construction from its representation</td>
-</tr>
-<tr>
-<td>Factory Method</td>
-<td>Creates an instance of several derived classes</td>
-</tr>
-<tr>
-<td>Object Pool</td>
-<td>Avoid expensive acquisition and release of resources by recycling objects that are no longer in use</td>
-</tr>
-<tr>
-<td>Prototype</td>
-<td>A fully initialized instance to be copied or cloned</td>
-</tr>
-<tr>
-<td>Singleton</td>
-<td>A class of which only a single instance can exist</td>
-</tr>
-</tbody></table>
-<h2 id="Structural"><a href="#Structural" class="headerlink" title="Structural"></a>Structural</h2><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Adapter</td>
-<td>Match interfaces of different classes</td>
-</tr>
-<tr>
-<td>Bridge</td>
-<td>Separates an object’s interface from its implementation</td>
-</tr>
-<tr>
-<td>Composite</td>
-<td>A tree structure of simple and composite objects</td>
-</tr>
-<tr>
-<td>Decorator</td>
-<td>Add responsibilities to objects dynamically</td>
-</tr>
-<tr>
-<td>Facade</td>
-<td>A single class that represents an entire subsystem</td>
-</tr>
-<tr>
-<td>Flyweight</td>
-<td>A fine-grained instance used for efficient sharing</td>
-</tr>
-<tr>
-<td>Private Class Data</td>
-<td>Restricts accessor&#x2F;mutator access</td>
-</tr>
-<tr>
-<td>Proxy</td>
-<td>An object representing another object</td>
-</tr>
-</tbody></table>
-<h2 id="Behavioral"><a href="#Behavioral" class="headerlink" title="Behavioral"></a>Behavioral</h2><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Chain of responsibility</td>
-<td>A way of passing a request between a chain of objects</td>
-</tr>
-<tr>
-<td>Command</td>
-<td>Encapsulate a command request as an object</td>
-</tr>
-<tr>
-<td>Interpreter</td>
-<td>A way to include language elements in a program</td>
-</tr>
-<tr>
-<td>Iterator</td>
-<td>Sequentially access the elements of a collection</td>
-</tr>
-<tr>
-<td>Mediator</td>
-<td>Defines simplified communication between classes</td>
-</tr>
-<tr>
-<td>Memento</td>
-<td>Capture and restore an object’s internal state</td>
-</tr>
-<tr>
-<td>Null Object</td>
-<td>Designed to act as a default value of an object</td>
-</tr>
-<tr>
-<td><a href="/KNOLxdYrSLyFelzwlzUwWQ">Observer</a></td>
-<td>當被觀察物件異動時通知多個物件觸發事件</td>
-</tr>
-<tr>
-<td>State</td>
-<td>Alter an object’s behavior when its state changes</td>
-</tr>
-<tr>
-<td>Strategy</td>
-<td>Encapsulates an algorithm inside a class</td>
-</tr>
-<tr>
-<td>Template method</td>
-<td>Defer the exact steps of an algorithm to a subclass</td>
-</tr>
-<tr>
-<td>Visitor</td>
-<td>Defines a new operation to a class without change</td>
-</tr>
-</tbody></table>
+<p><img src="https://i.imgur.com/umsxUvo.png"></p>
+<h2 id="瀏覽器組成"><a href="#瀏覽器組成" class="headerlink" title="瀏覽器組成"></a>瀏覽器組成</h2><ol>
+<li>Interface<br>使用者介面</li>
+<li>The browser engine<br>負責UI及渲染引擎之間的互動</li>
+<li>The rendering engine<br>負責渲染請求後的結果，例如將接收到的HTML、CSS解析出來再呈現在畫面上</li>
+<li>Networking<br>處理網路請求(HTTP Request)，各平台間沒有差異</li>
+<li>UI backend<br>介面的底層通用方法，各平台無差異性</li>
+<li>JavaScript interpreter<br>解析JavaScript</li>
+<li>Data storage<br>儲存資料，在硬碟上直接儲存，cookie、local storage、session、FileSystem…<br> <img src="https://i.imgur.com/PtfDSWa.png"><br> <em>取材自<a target="_blank" rel="noopener" href="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/">howbrowserswork</a></em></li>
+</ol>
 <hr>
-<p><a target="_blank" rel="noopener" href="https://cs.lmu.edu/~ray/notes/designpatterns/">https://cs.lmu.edu/~ray/notes/designpatterns/</a><br><a target="_blank" rel="noopener" href="https://www.freecodecamp.org/news/the-basic-design-patterns-all-developers-need-to-know/">https://www.freecodecamp.org/news/the-basic-design-patterns-all-developers-need-to-know/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/">howbrowserswork</a></p>
 
     </div>
 
@@ -420,21 +312,19 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Design-Pattern/" rel="tag"><i class="fa fa-tag"></i> Design Pattern</a>
+              <a href="/tags/browser/" rel="tag"><i class="fa fa-tag"></i> browser</a>
+              <a href="/tags/web/" rel="tag"><i class="fa fa-tag"></i> web</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/03/16/DesignPattern-Observer/" rel="prev" title="Observer">
-                  <i class="fa fa-chevron-left"></i> Observer
+                <a href="/2022/03/31/Git-SSH-HTTPS/" rel="prev" title="SSH & HTTPS">
+                  <i class="fa fa-chevron-left"></i> SSH & HTTPS
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/03/22/Hexo-troubleShooting/" rel="next" title="TroubleShooting">
-                  TroubleShooting <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
